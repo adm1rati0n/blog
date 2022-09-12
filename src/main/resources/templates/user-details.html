@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+
+<header th:insert="/blocks/header"/>
+
+<div th:each="user : ${users}">
+  <h3 th:text="${user.surname + ' ' + user.name + ' ' + user.middlename}"></h3>
+  <p class="card-text" th:text="'Дата рождения: ' + ${user.getDateOfBirth()}"></p>
+  <p class="card-text"><small class="text-muted" th:text="${user.getFollowers()} + ' подписчиков'"></small></p>
+  <form th:action="@{/blog/users/{id}/delete(id=${user.getId()})}" method="post">
+    <a th:href="@{/blog/users/{id}/edit(id=${user.getId()})}" class="btn btn-success">Редактировать</a>
+    <button type="submit" class="btn btn-danger">Удалить</button>
+  </form>
+</div>
+</body>
+</html>

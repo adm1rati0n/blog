@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<header th:insert="blocks/header"></header>
+<div class="b-example-divider"></div>
+<form method="post" th:action="${'/blog/users/filter/result'}">
+    <input type="text" name="surname">
+    <button type="submit">Найти</button>
+    <div th:each="el : ${result}">
+        <p th:text="${el.surname}"></p>
+        <p th:text="${el.name}"></p>
+        <p th:text="${el.middlename}"></p>
+        <p th:text="${el.dateOfBirth}"></p>
+    </div>
+</form>
+</body>
+</html>

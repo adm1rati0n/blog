@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Getting Started: Serving Web Content</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<header th:insert="/blocks/header"/>
+<style>
+  .center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+</style>
+<form th:action="${'/blog/users/add'}" method="post" class="center" th:object="${user}">
+  <h1 class="h2 mb-3 fw-normal">Добавить пользователя</h1>
+  <div class="col-md-12">
+    <input th:field="*{surname}" type="text" class="form-control" name="surname" placeholder="Фамилия">
+    <div style="color: red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></div>
+  </div>
+  <br/>
+  <div class="col-md-12">
+    <input type="text" th:field="*{name}" class="form-control" name="name" placeholder="Имя">
+    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+  </div>
+  </br>
+  <div class="col-md-12">
+    <input type="text" th:field="*{middlename}" class="form-control" name="middlename" placeholder="Отчество">
+    <div style="color: red" th:if="${#fields.hasErrors('middlename')}" th:errors="*{middlename}"></div>
+  </div>
+  <br/>
+  <div class="col-md-12">
+    <input type="date" th:field="*{dateOfBirth}" class="form-control" name="dateOfBirth" placeholder="Дата рождения">
+    <div style="color: red" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></div>
+  </div>
+  <br/>
+  <button class="w-100 btn btn-lg btn-primary" type="submit">Добавить пользователя</button>
+</form>
+</body>
+</html>

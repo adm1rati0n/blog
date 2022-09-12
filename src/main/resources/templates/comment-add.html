@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Getting Started: Serving Web Content</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<header th:insert="/blocks/header"/>
+<style>
+  .center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+</style>
+<form th:action="${'/blog/comments/add'}" method="post" class="center" th:object="${comment}">
+  <h1 class="h2 mb-3 fw-normal">Написать комментарий</h1>
+  <div class="col-md-12">
+    <input th:field="*{surname}" type="text" class="form-control" name="surname" placeholder="Фамилия">
+    <div style="color: red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></div>
+  </div>
+  <br/>
+  <div class="col-md-12">
+    <input th:field="*{name}" type="text" class="form-control" name="name" placeholder="Имя">
+    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+  </div>
+  </br>
+  <div class="col-md-12">
+    <input th:field="*{middlename}" type="text" class="form-control" name="middlename" placeholder="Отчество">
+    <div style="color: red" th:if="${#fields.hasErrors('middlename')}" th:errors="*{middlename}"></div>
+  </div>
+  <br/>
+  <div class="col-md-12">
+    <input th:field="*{comment}" type="text" class="form-control" name="comment" placeholder="Текст комментария">
+    <div style="color: red" th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}"></div>
+  </div>
+  <br/>
+  <button class="w-100 btn btn-lg btn-primary" type="submit">Отправить</button>
+</form>
+</body>
+</html>

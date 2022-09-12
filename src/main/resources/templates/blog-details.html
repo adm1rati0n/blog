@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+
+<header th:insert="/blocks/header"/>
+<div th:each="posts : ${post}">
+  <h3>Подробнее про статью: </h3> <h3 th:text="${posts.title}"></h3>
+  <p class="card-text" th:text="${posts.anons}"></p>
+  <p class="card-text" th:text="${posts.full_text}"></p>
+  <p class="card-text"><small class="text-muted" th:text="${posts.getViews()} + ' просмотров'"></small></p>
+  <form th:action="'/blog/' + ${posts.id} + '/remove'" method="post">
+    <a th:href="'/blog/' + ${posts.id} + '/edit'" class="btn btn-success">Редактировать</a>
+    <button type="submit" class="btn btn-danger">Удалить</button>
+  </form>
+</div>
+</body>
+</html>

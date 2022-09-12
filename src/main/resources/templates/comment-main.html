@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body class="">
+<header th:insert="blocks/header"></header>
+
+<h1>Все комментарии</h1>
+
+<a href="/blog/comments/filter">Поиск комментария</a>
+<a href="/blog/comments/add">Написать комментарий</a>
+
+<div class="b-example-divider"></div>
+<div th:each="comment : ${comments}">
+    <div class="col-sm-6 col-lg-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-text" th:text="${comment.getSurname() + ' ' + comment.getName() + ' ' + comment.getMiddlename}"></h3>
+                <p class="card-text" th:text="${comment.getComment()}"></p>
+                <p class="card-text"><small class="text-muted" th:text="${comment.getDate()}"></small></p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

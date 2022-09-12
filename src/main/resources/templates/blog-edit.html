@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Редактирование статьи</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<header th:insert="blocks/header"></header>
+<style>
+  .center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+</style>
+<div th:each="post : ${posts}">
+  <form th:action="@{/blog/{id}/edit(id=${post.getId()})}" method="post" th:object="${post}" class="center">
+    <h1 class="h2 mb-3 fw-normal">Изменить новость</h1>
+    <div class="col-md-12">
+      <input type="text" th:field="*{title}" class="form-control" name="title" placeholder="Название">
+      <div style="color: red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+    </div>
+    <br/>
+    <div class="col-md-12">
+      <input th:field="*{anons}" th:value="${post.anons}" type="text" class="form-control" name="anons" placeholder="Анонс">
+      <div style="color: red" th:if="${#fields.hasErrors('anons')}" th:errors="*{anons}"></div>
+    </div>
+    </br>
+    <div class="col-md-12">
+      <input th:field="*{full_text}" th:value="${post.full_text}" type="text" class="form-control" name="full_text" placeholder="Текст">
+      <div style="color: red" th:if="${#fields.hasErrors('full_text')}" th:errors="*{full_text}"></div>
+    </div>
+    <br/>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Сохранить изменения</button>
+  </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Редактирование пользователя</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div th:each="comment : ${comments}">
+    <h3>Подробнее про комментарий: </h3> <h3 th:text="${comment.comment}"></h3>
+    <p>Автор:</p>
+    <p th:text="${comment.surname + ' ' + comment.name + ' ' + comment.middlename}"></p>
+    <p th:text="${comment.date}"></p>
+    <a th:href="'/blog/comments/' + ${comment.id} + '/edit'">Редактировать</a>
+    <form th:action="'/blog/comments/' + ${comment.id} + '/remove'" method="post">
+        <button type="submit" class="btn btn-del">Удалить</button>
+    </form>
+</div>
+</body>
+</html>

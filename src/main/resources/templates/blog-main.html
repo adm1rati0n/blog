@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+
+<body class="">
+<header th:insert="blocks/header"></header>
+
+<h1>Все статьи</h1>
+
+<a href="/blog/filter">Поиск статей</a>
+<a href="/blog/add">Добавить статью</a>
+
+<div class="b-example-divider"></div>
+<div th:each="post : ${posts}">
+    <div class="col-sm-6 col-lg-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title" th:text="${post.getTitle()}"></h3>
+                <a th:href="@{/blog/{id}(id=${post.getId()})}" class="btn btn-success">Подробнее</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
