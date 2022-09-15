@@ -1,6 +1,7 @@
 package com.example.demo.models;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.thymeleaf.util.DateUtils;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 @Entity
 public class User {
@@ -17,13 +19,12 @@ public class User {
     private Long id;
     @NotEmpty(message = "Поле не может быть пустым")
     @Size(min = 2, max = 255, message = "Размер данного поля должен быть в диапазоне от 2 до 255")
-    @NotBlank
+    @NotBlank(message = "Поле должно содержать хотя бы один непробельный символ")
     private String surname, name, middlename;
-    @NotEmpty(message = "Поле не может быть пустым")
-    @Past(message = "Дата должна быть меньше текущей")
+    @NotNull(message = "Поле не может быть пустым")
+    @Past(message = "Дата должна быть в прошлом")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
-    @Positive
     private Integer followers;
 
     public User() {
@@ -69,9 +70,19 @@ public class User {
         this.middlename = middlename;
     }
 
-    public String getDateOfBirth() {
+    public String getDateOfBirthString() {
         SimpleDateFormat sdfDate = new SimpleDateFormat("dd-MM-yyyy");
         return sdfDate.format(dateOfBirth);
+    }
+
+    public Date getDateOfBirth(){
+        return dateOfBirth;
+    }
+    
+    public String getDateOfBirthDate(){
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+        String date = DateUtils.format(dateOfBirth, "yyyy-MM-dd", Locale.ROOT);
+        return date;
     }
 
     public void setDateOfBirth(Date dateOfBirth) {

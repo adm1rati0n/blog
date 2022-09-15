@@ -27,13 +27,12 @@ public class UserController {
     }
 
     @GetMapping("/add")
-    public String userAdd(User user, Model model){
+    public String userAdd(User user, Model model) {
         return "user-add";
     }
 
     @PostMapping("/add")
     public String userAdd(
-            Model model,
             @ModelAttribute("user")
             @Valid User user,
             BindingResult bindingResult
@@ -41,6 +40,7 @@ public class UserController {
         if(bindingResult.hasErrors()){
             return "user-add";
         }
+        user.setFollowers(0);
         userRepository.save(user);
         return "redirect:/blog/users";
     }
@@ -64,12 +64,12 @@ public class UserController {
     public String userUpdate(@PathVariable("id")long id,
                              @ModelAttribute("user")
                              @Valid User user,
-                             BindingResult bindingResult,
-                             Model model)
+                             BindingResult bindingResult)
     {
         if(bindingResult.hasErrors()){
             return "user-add";
         }
+        user.setFollowers(0);
         userRepository.save(user);
         return "redirect:/blog/users";
     }

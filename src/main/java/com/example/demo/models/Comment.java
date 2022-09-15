@@ -17,18 +17,18 @@ public class Comment{
 
     @NotEmpty(message = "Поле не может быть пустым")
     @Size(min = 2, max = 255, message = "Размер данного поля должен быть в диапазоне от 2 до 255")
-    @NotBlank
-    private String surname, name, middlename, comment;
+    @NotBlank(message = "Поле должно содержать хотя бы один непробельный символ")
+    private String surname, name, middlename, fullText;
     private Date date;
 
     public Comment(){
     }
 
-    public Comment(String surname, String name, String middlename, String comment, Date date){
+    public Comment(String surname, String name, String middlename, String fullText, Date date){
         this.surname = surname;
         this.name = name;
         this.middlename = middlename;
-        this.comment = comment;
+        this.fullText = fullText;
         this.date = date;
     }
 
@@ -64,12 +64,12 @@ public class Comment{
         this.middlename = middlename;
     }
 
-    public String getComment() {
-        return comment;
+    public String getFullText() {
+        return fullText;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setFullText(String fullText) {
+        this.fullText = fullText;
     }
 
     public Date getDate() {

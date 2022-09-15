@@ -68,24 +68,24 @@ public class BlogController {
             return "redirect:";
         }
         Optional<Post> post = postRepository.findById(id);
-        ArrayList<Post> res = new ArrayList<>();
-        post.ifPresent(res::add);
-        model.addAttribute("posts",res);
+        if(post.isEmpty()){
+            return "redirect:/blog";
+        }
+        model.addAttribute("post", post.get());
         return "blog-edit";
     }
 
     @PostMapping("/{id}/edit")
     public String blogPostUpdate(@PathVariable("id")long id,
-                                 @ModelAttribute("user")
+                                 @ModelAttribute("post")
                                  @Valid Post post,
-                                 BindingResult bindingResult,
-                                 Model model)
+                                 BindingResult bindingResult)
     {
         if(bindingResult.hasErrors()){
-            return "user-add";
+            return "blog-add";
         }
         postRepository.save(post);
-        return "redirect:";
+        return "redirect:/blog";
     }
 
     @GetMapping("/filter")
@@ -103,7 +103,7 @@ public class BlogController {
     public String blogBlogDelete(@PathVariable("id") long id, Model model){
         Post post = postRepository.findById(id).orElseThrow();
         postRepository.delete(post);
-        return "redirect:";
+        return "redirect:/blog";
     }
 
 }

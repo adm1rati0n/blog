@@ -34,8 +34,8 @@
   </div>
   <br/>
   <div class="col-md-12">
-    <input th:field="*{comment}" type="text" class="form-control" name="comment" placeholder="Текст комментария">
-    <div style="color: red" th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}"></div>
+    <input th:field="*{fullText}" type="text" class="form-control" name="comment" placeholder="Текст комментария">
+    <div style="color: red" th:if="${#fields.hasErrors('fullText')}" th:errors="*{fullText}"></div>
   </div>
   <br/>
   <button class="w-100 btn btn-lg btn-primary" type="submit">Отправить</button>

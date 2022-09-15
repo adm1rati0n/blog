@@ -8,14 +8,12 @@
 <header th:insert="blocks/header"></header>
 
 <form method="post" th:action="${'/blog/comments/filter/result'}">
-    <input type="text" name="surname">
+    <input type="text" name="fullText">
     <button type="submit">Найти</button>
     <div th:each="el : ${result}">
-        <p th:text="${el.surname}"></p>
-        <p th:text="${el.name}"></p>
-        <p th:text="${el.middlename}"></p>
-        <p th:text="${el.comment}"></p>
-        <p th:text="${el.date}"></p>
+        <p th:text="${el.surname + ' ' + el.name + ' ' + el.middlename}"></p>
+        <p th:text="${el.fullText}"></p>
+        <p th:text="${el.getDate()}"></p>
     </div>
 </form>
 </body>

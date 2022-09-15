@@ -16,7 +16,6 @@
         transform: translate(-50%, -50%);
     }
 </style>
-<div th:each="comment : ${comments}">
 <form th:action="@{/blog/comments/{id}/edit(id=${comment.getId()})}" method="post" class="center" th:object="${comment}">
     <h1 class="h2 mb-3 fw-normal">Изменить комментарий</h1>
     <div class="col-md-12">
@@ -35,12 +34,11 @@
     </div>
     <br/>
     <div class="col-md-12">
-        <input th:field="*{comment}" th:value="${comment.getComment()}" type="text" class="form-control" name="comment" placeholder="Текст комментария">
-        <div style="color: red" th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}"></div>
+        <input th:field="*{fullText}" th:value="${comment.getFullText()}" type="text" class="form-control" name="comment" placeholder="Текст комментария">
+        <div style="color: red" th:if="${#fields.hasErrors('fullText')}" th:errors="*{fullText}"></div>
     </div>
     <br/>
     <button class="w-100 btn btn-lg btn-primary" type="submit">Отправить</button>
 </form>
-</div>
 </body>
 </html>

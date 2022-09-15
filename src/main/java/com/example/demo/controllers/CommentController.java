@@ -31,13 +31,12 @@ public class CommentController {
     }
 
     @GetMapping("/add")
-    public String commentAdd(Model model){
+    public String commentAdd(Model model, Comment comment){
         return "comment-add";
     }
 
     @PostMapping("/add")
     public String commentAdd(
-            Model model,
             @ModelAttribute("comment")
             @Valid Comment comment,
             BindingResult bindingResult
@@ -45,6 +44,7 @@ public class CommentController {
         if(bindingResult.hasErrors()){
             return "comment-add";
         }
+        comment.setDate(new Date());
         commentRepository.save(comment);
         return "redirect:/blog/comments";
     }
@@ -52,9 +52,9 @@ public class CommentController {
     public String commentFilter(Model model) {return "comment-filter";}
 
     @PostMapping("/filter/result")
-    public String commentResult(@RequestParam String surname, Model model)
+    public String commentResult(@RequestParam String fullText, Model model)
     {
-        List<Comment> result = commentRepository.findByCommentContains(surname);
+        List<Comment> result = commentRepository.findByFullTextContains(fullText);
         model.addAttribute("result", result);
         return "comment-filter";
     }
@@ -69,8 +69,7 @@ public class CommentController {
     public String commentUpdate(@PathVariable("id")long id,
                                 @ModelAttribute("comment")
                                 @Valid Comment comment,
-                                BindingResult bindingResult,
-                                Model model
+                                BindingResult bindingResult
     ){
         if(bindingResult.hasErrors()){
             return "comment-edit";
@@ -83,13 +82,11 @@ public class CommentController {
     public String commentEdit(@PathVariable("id")long id,
                            Model model)
     {
-        if(!commentRepository.existsById(id)){
+        Optional<Comment> comment = commentRepository.findById(id);
+        if(comment.isEmpty()){
             return "redirect:/blog/comments";
         }
-        Optional<Comment> comment = commentRepository.findById(id);
-        ArrayList<Comment> res = new ArrayList<>();
-        comment.ifPresent(res::add);
-        model.addAttribute("comments",res);
+        model.addAttribute("comment", comment.get());
         return "comment-edit";
     }
     @GetMapping("/{id}")

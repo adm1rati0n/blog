@@ -16,7 +16,6 @@
     transform: translate(-50%, -50%);
   }
 </style>
-<div th:each="post : ${posts}">
   <form th:action="@{/blog/{id}/edit(id=${post.getId()})}" method="post" th:object="${post}" class="center">
     <h1 class="h2 mb-3 fw-normal">Изменить новость</h1>
     <div class="col-md-12">
@@ -36,6 +35,5 @@
     <br/>
     <button class="w-100 btn btn-lg btn-primary" type="submit">Сохранить изменения</button>
   </form>
-</div>
 </body>
 </html>

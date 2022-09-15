@@ -5,7 +5,6 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<header th:insert="/blocks/header"/>
 <style>
   .center {
     margin: 0;
@@ -16,25 +15,26 @@
     transform: translate(-50%, -50%);
   }
 </style>
-<form th:action="${'/blog/users/add'}" method="post" class="center" th:object="${user}">
+<header th:insert="/blocks/header"/>
+<form method="post" class="center" th:object="${user}">
   <h1 class="h2 mb-3 fw-normal">Добавить пользователя</h1>
   <div class="col-md-12">
-    <input th:field="*{surname}" type="text" class="form-control" name="surname" placeholder="Фамилия">
+    <input type="text" class="form-control" th:field="*{surname}" name="surname" placeholder="Фамилия">
     <div style="color: red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></div>
   </div>
   <br/>
   <div class="col-md-12">
-    <input type="text" th:field="*{name}" class="form-control" name="name" placeholder="Имя">
+    <input type="text" class="form-control" th:field="*{name}" name="name" placeholder="Имя">
     <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
   </div>
   </br>
   <div class="col-md-12">
-    <input type="text" th:field="*{middlename}" class="form-control" name="middlename" placeholder="Отчество">
+    <input type="text" class="form-control" th:field="*{middlename}" name="middlename" placeholder="Отчество">
     <div style="color: red" th:if="${#fields.hasErrors('middlename')}" th:errors="*{middlename}"></div>
   </div>
   <br/>
   <div class="col-md-12">
-    <input type="date" th:field="*{dateOfBirth}" class="form-control" name="dateOfBirth" placeholder="Дата рождения">
+    <input type="date" class="form-control" th:field="*{dateOfBirth}" name="dateOfBirth" placeholder="Дата рождения">
     <div style="color: red" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></div>
   </div>
   <br/>

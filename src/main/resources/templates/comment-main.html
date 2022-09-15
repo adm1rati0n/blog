@@ -9,8 +9,8 @@
 
 <h1>Все комментарии</h1>
 
-<a href="/blog/comments/filter">Поиск комментария</a>
-<a href="/blog/comments/add">Написать комментарий</a>
+<a href="/blog/comments/add" class="btn btn-warning">Написать комментарий</a>
+<a href="/blog/comments/filter" class="btn btn-success">Поиск комментария</a>
 
 <div class="b-example-divider"></div>
 <div th:each="comment : ${comments}">
@@ -18,8 +18,8 @@
         <div class="card">
             <div class="card-body">
                 <h3 class="card-text" th:text="${comment.getSurname() + ' ' + comment.getName() + ' ' + comment.getMiddlename}"></h3>
-                <p class="card-text" th:text="${comment.getComment()}"></p>
-                <p class="card-text"><small class="text-muted" th:text="${comment.getDate()}"></small></p>
+                <p class="card-text" th:text="${comment.getFullText()}"></p>
+                <a th:href="@{/blog/comments/{id}(id=${comment.getId()})}" class="btn btn-success">Подробнее</a>
             </div>
         </div>
     </div>

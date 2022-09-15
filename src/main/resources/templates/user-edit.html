@@ -20,7 +20,8 @@
     <form method="post" class="center" th:object="${user}">
         <h1 class="h2 mb-3 fw-normal">Редактировать пользователя</h1>
         <div class="col-md-12">
-            <input type="text" class="form-control" th:value="*{surname}" th:field="*{surname}" name="surname" placeholder="Фамилия">
+            <input type="text" class="form-control" th:value="*{surname}" th:field="*{surname}" name="surname"
+                   placeholder="Фамилия">
             <div style="color: red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></div>
         </div>
         <br/>
@@ -30,17 +31,18 @@
         </div>
         </br>
         <div class="col-md-12">
-            <input type="text" class="form-control" th:value="*{middlename}" th:field="*{middlename}" name="middlename" placeholder="Отчество">
+            <input type="text" class="form-control" th:value="*{middlename}" th:field="*{middlename}" name="middlename"
+                   placeholder="Отчество">
             <div style="color: red" th:if="${#fields.hasErrors('middlename')}" th:errors="*{middlename}"></div>
         </div>
         <br/>
         <div class="col-md-12">
-            <input type="date" class="form-control" th:value="*{dateOfBirth}" th:field="*{dateOfBirth}" name="dateOfBirth" placeholder="Дата рождения">
+            <input type="date" class="form-control" th:value="*{dateOfBirthString}" th:field="*{dateOfBirth}"
+                   name="dateOfBirth" placeholder="Дата рождения">
             <div style="color: red" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></div>
         </div>
         <br/>
         <button class="w-100 btn btn-lg btn-primary" type="submit">Сохранить изменения</button>
     </form>
-</div>
 </body>
 </html>
