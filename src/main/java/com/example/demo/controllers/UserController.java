@@ -1,8 +1,10 @@
 package com.example.demo.controllers;
 
+import com.example.demo.Repo.AddressRepository;
+import com.example.demo.Repo.PassportRepository;
+import com.example.demo.Repo.UniversityRepository;
 import com.example.demo.Repo.UserRepository;
-import com.example.demo.models.Post;
-import com.example.demo.models.User;
+import com.example.demo.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,12 @@ import java.util.*;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UniversityRepository universityRepository;
+    @Autowired
+    private AddressRepository addressRepository;
+    @Autowired
+    private PassportRepository passportRepository;
 
     @GetMapping("")
     public String usersMain(Model model){
@@ -33,6 +41,7 @@ public class UserController {
 
     @PostMapping("/add")
     public String userAdd(
+            Model model,
             @ModelAttribute("user")
             @Valid User user,
             BindingResult bindingResult

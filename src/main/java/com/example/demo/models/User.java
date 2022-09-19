@@ -3,13 +3,11 @@ package com.example.demo.models;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.thymeleaf.util.DateUtils;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 @Entity
@@ -26,6 +24,42 @@ public class User {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
     private Integer followers;
+
+    @ManyToMany
+    @JoinTable (name = "user_university",
+    joinColumns = @JoinColumn(name = "user_id"),
+    inverseJoinColumns = @JoinColumn(name = "university_id"))
+    private List<University> universities;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Address address;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "passport_id")
+    private Passport passport;
+
+    public Passport getPassport() {
+        return passport;
+    }
+
+    public void setPasport(Passport passport) {
+        this.passport = passport;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public List<University> getUniversities() {
+        return universities;
+    }
+
+    public void setUniversities(List<University> universities) {
+        this.universities = universities;
+    }
 
     public User() {
     }

@@ -37,6 +37,27 @@
     <input type="date" class="form-control" th:field="*{dateOfBirth}" name="dateOfBirth" placeholder="Дата рождения">
     <div style="color: red" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></div>
   </div>
+  <div class="col-md-12">
+    <select name="university" th:field="*{universities}">
+      <div th:each="element : ${universities}">
+        <option th:text="${element.name}"></option>
+      </div>
+    </select>
+  </div>
+  <div class="col-md-12">
+    <select name="street" th:field="*{address}">
+      <div th:each="element : ${address}">
+        <option th:text="${element.street}"></option>
+      </div>
+    </select>
+  </div>
+  <div class="col-md-12">
+    <select name="number" th:field="*{passport}">
+      <div th:each="element : ${passport}">
+        <option th:text="${element.number}"></option>
+      </div>
+    </select>
+  </div>
   <br/>
   <button class="w-100 btn btn-lg btn-primary" type="submit">Добавить пользователя</button>
 </form>

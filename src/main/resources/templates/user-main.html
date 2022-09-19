@@ -18,6 +18,9 @@
         <div class="card">
             <div class="card-body">
                 <h3 class="card-text" th:text="${user.getSurname() + ' ' + user.getName() + ' ' + user.getMiddlename}"></h3>
+                <p class="card-text" th:text="${user.universities}"></p>
+                <p class="card-text" th:text="${user.address}"></p>
+                <p class="card-text" th:text="${user.passport}"></p>
                 <a th:href="@{/blog/users/{id}(id=${user.getId()})}" class="btn btn-success">Подробнее</a>
             </div>
         </div>
